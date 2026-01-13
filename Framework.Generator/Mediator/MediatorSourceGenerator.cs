@@ -27,12 +27,9 @@ public class MediatorSourceGenerator : IIncrementalGenerator
     {
         var classSymbol = ctx.SemanticModel.GetDeclaredSymbol((ClassDeclarationSyntax)ctx.Node) as INamedTypeSymbol;
 
-        if (classSymbol != null && classSymbol.AllInterfaces.Any(i => i.Name == "IRequestHandler"))
-        {
-            return classSymbol;
-        }
-
-        return null;
+        return classSymbol != null && classSymbol.AllInterfaces.Any(i => i.Name == "IRequestHandler")
+            ? classSymbol
+            : null;
     }
 
     private static void Execute(SourceProductionContext context, ImmutableArray<INamedTypeSymbol?> handlers)
@@ -61,21 +58,20 @@ public class MediatorSourceGenerator : IIncrementalGenerator
 
             var interfaceSymbol = handler.AllInterfaces.FirstOrDefault(i => i.Name == "IRequestHandler");
 
-            if (interfaceSymbol is { TypeArguments.Length: 2 })
-            {
-                var requestType = interfaceSymbol.TypeArguments[0].ToDisplayString();
-                var handlerType = handler.ToDisplayString();
+            if (interfaceSymbol is not { TypeArguments.Length: 2 }) continue;
 
-                sb.AppendLine($"        _handlers.Add(typeof({requestType}), async (req, ct) =>");
-                sb.AppendLine("        {");
-                sb.AppendLine(
-                    $"            var handler = (_serviceProvider.GetService(typeof({handlerType})) as {handlerType}) ");
-                sb.AppendLine(
-                    $"                          ?? ActivatorUtilities.CreateInstance<{handlerType}>(_serviceProvider);");
-                sb.AppendLine($"            var result = await handler.HandleAsync(({requestType})req);");
-                sb.AppendLine("            return (object)result;");
-                sb.AppendLine("        });");
-            }
+            var requestType = interfaceSymbol.TypeArguments[0].ToDisplayString();
+            var handlerType = handler.ToDisplayString();
+
+            sb.AppendLine($"        _handlers.Add(typeof({requestType}), async (req, ct) =>");
+            sb.AppendLine("        {");
+            sb.AppendLine(
+                $"            var handler = (_serviceProvider.GetService(typeof({handlerType})) as {handlerType}) ");
+            sb.AppendLine(
+                $"                          ?? ActivatorUtilities.CreateInstance<{handlerType}>(_serviceProvider);");
+            sb.AppendLine($"            var result = await handler.HandleAsync(({requestType})req);");
+            sb.AppendLine("            return (object)result;");
+            sb.AppendLine("        });");
         }
 
         sb.AppendLine("    }");
