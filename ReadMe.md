@@ -45,21 +45,27 @@ Add the following `ProjectReference` to the implementing project’s `.csproj` f
 
 This ensures the generator runs at build time without being referenced at runtime.
 
+### 5. Register the Mediator and Handlers
+```bash
+services.AddSingleton<IMediator, Mediator>();
+services.AddSingleton<IRequestHandler<SimpleRequest, SimpleResponse>, SimpleRequestHandler>();
+```
 
-### 5. Clean the Solution
+
+### 6. Clean the Solution
 
 ```bash
 dotnet clean
 ```
 
-### 6. Restore Dependencies
+### 7. Restore Dependencies
 
 ```bash
 dotnet restore
 ```
 
 
-### 7. Build the Solution
+### 8. Build the Solution
 
 ```bash
 dotnet build
