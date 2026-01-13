@@ -1,4 +1,5 @@
 using Framework.Tools.Contract;
+using Framework.Tools.Exceptions;
 
 namespace Framework.Tools.Implementation;
 
@@ -20,7 +21,7 @@ public partial class Mediator : IMediator
     public async Task<TResponse> HandleAsync<TResponse>(IRequest<TResponse> request, CancellationToken ct = default)
     {
         if (!_handlers.TryGetValue(request.GetType(), out var handlerWrapper))
-            throw new Exception("Handler not found");
+            throw new MediatorException($"Handler for type {request.GetType()} not found");
 
         return (TResponse)await handlerWrapper(request, ct);
     }
