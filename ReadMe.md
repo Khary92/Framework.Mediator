@@ -51,21 +51,28 @@ services.AddSingleton<IMediator, Mediator>();
 services.AddSingleton<IRequestHandler<SimpleRequest, SimpleResponse>, SimpleRequestHandler>();
 ```
 
+### 6. Adjust namespaces in generator
+```bash
+    private const string MediatorName = "Mediator";
+    private const string MediatorImplNamespace = "TestProject.Implementation";
+    private const string MediatorContractNamespace = "TestProject.Contract";
+```
+I know that this is not the best way to do it, but i am still learning.
 
-### 6. Clean the Solution
+### 7. Clean the Solution
 
 ```bash
 dotnet clean
 ```
 
-### 7. Restore Dependencies
+### 8. Restore Dependencies
 
 ```bash
 dotnet restore
 ```
 
 
-### 8. Build the Solution
+### 9. Build the Solution
 
 ```bash
 dotnet build
