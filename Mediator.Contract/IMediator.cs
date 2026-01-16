@@ -1,4 +1,4 @@
-namespace Framework.Tools.Contract;
+namespace Mediator.Contract;
 
 public interface IMediator
 {

@@ -1,4 +1,4 @@
-namespace Framework.Tools.Contract;
+namespace Mediator.Contract;
 
 public interface IRequestHandler<in TRequestIn, TResponseOut> where TRequestIn : IRequest<TResponseOut>
 {
