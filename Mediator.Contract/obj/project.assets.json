@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/jannic/Projects/Framework.Tools/Mediator.Contract/Mediator.Contract.csproj",
+      "projectUniqueName": "/home/jannic/Projects/Framework.Mediator/Mediator.Contract/Mediator.Contract.csproj",
       "projectName": "Mediator.Contract",
-      "projectPath": "/home/jannic/Projects/Framework.Tools/Mediator.Contract/Mediator.Contract.csproj",
+      "projectPath": "/home/jannic/Projects/Framework.Mediator/Mediator.Contract/Mediator.Contract.csproj",
       "packagesPath": "/home/jannic/.nuget/packages/",
-      "outputPath": "/home/jannic/Projects/Framework.Tools/Mediator.Contract/obj/",
+      "outputPath": "/home/jannic/Projects/Framework.Mediator/Mediator.Contract/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/jannic/.nuget/NuGet/NuGet.Config"

@@ -4,10 +4,10 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
 
-namespace Mediator.Generator.Mediator;
+namespace Mediator.Generator;
 
 [Generator(LanguageNames.CSharp)]
-public class MediatorSourceGenerator : IIncrementalGenerator
+public class SourceGenerator : IIncrementalGenerator
 {
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
