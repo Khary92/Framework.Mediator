@@ -12,6 +12,7 @@ public class MediatorSourceGenerator : IIncrementalGenerator
     private const string MediatorName = "Mediator";
     private const string MediatorImplNamespace = "TestProject.Implementation";
     private const string MediatorContractNamespace = "TestProject.Contract";
+    
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
         var handlerDeclarations = context.SyntaxProvider
