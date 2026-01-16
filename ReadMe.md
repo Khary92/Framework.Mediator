@@ -19,60 +19,43 @@ Clone the repository containing the framework:
 git clone <repository-url>
 ```
 
-### 2. Copy the Generator Project
+### 2. Copy the projects
 
-Copy the project  
-`Framework.Generator`  
+Copy the projects `Mediator.Contract` and `Mediator.Generator`
 into your solution.
 
-### 3. Copy the Mediator Framework
-
-Copy the folders from  
-`Framework.Mediator`  
-into your **target project**.
-
-### 4. Update the `.csproj` File
+### 3. Update the `.csproj` file of your consuming project
 
 Add the following `ProjectReference` to the implementing project’s `.csproj` file:
 
 ```xml
 <ItemGroup>
-   <ProjectReference Include="..\Framework.Generator\Framework.Generator.csproj"
-                     OutputItemType="Analyzer"
-                     ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\Mediator.Contract\Mediator.Contract.csproj" />
+
+    <ProjectReference Include="..\Mediator.Generator\Mediator.Generator.csproj"
+                      OutputItemType="Analyzer"
+                      ReferenceOutputAssembly="false" />
 </ItemGroup>
 ```
 
-This ensures the generator runs at build time without being referenced at runtime.
-
-### 5. Register the Mediator and Handlers
+### 4. Register the Mediator in Dependency Injection container
 ```bash
-services.AddSingleton<IMediator, Mediator>();
-services.AddSingleton<IRequestHandler<SimpleRequest, SimpleResponse>, SimpleRequestHandler>();
+services.AddSingletonMediatorServices();
 ```
 
-### 6. Adjust namespaces in generator
-```bash
-    private const string MediatorName = "Mediator";
-    private const string MediatorImplNamespace = "TestProject.Implementation";
-    private const string MediatorContractNamespace = "TestProject.Contract";
-```
-I know that this is not the best way to do it, but i am still learning.
-
-### 7. Clean the Solution
+### 5. Clean the Solution
 
 ```bash
 dotnet clean
 ```
 
-### 8. Restore Dependencies
+### 6. Restore Dependencies
 
 ```bash
 dotnet restore
 ```
 
-
-### 9. Build the Solution
+### 7. Build the Solution
 
 ```bash
 dotnet build
